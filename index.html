@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>HTML5 Game Development Tutorial | Spicy Yoghurt</title>
+    <meta name="description" content="HTML5 game development tutorial">
+    <meta name="author" content="Piet">
+</head>
+
+<body>
+    <canvas id="canvas" width="750" height="400" style="border:1px solid lightgrey;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <script>
+        "use strict";
+
+        // Declare as variable
+        var canvas;
+        var context;
+        var rectX = 0;
+        var rectY = 0;
+        var oldTimeStamp = 0;
+
+        // Listen to the onLoad event
+        window.onload = init;
+
+        // Trigger init function when the page has loaded
+        function init() {
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+
+            // Request an animation frame for the first time
+            // The gameLoop() function will be called as a callback of this request
+            window.requestAnimationFrame(gameLoop);
+        }
+
+        function gameLoop(timeStamp) {
+            // Calculate how much time has passed
+            var secondsPassed = (timeStamp - oldTimeStamp) / 1000;
+            oldTimeStamp = timeStamp;
+
+            // Update game objects
+            update(secondsPassed);
+
+            // Perform the drawing operation
+            draw(secondsPassed);
+
+            // The loop function has reached it's end
+            // Keep requesting new frames
+            window.requestAnimationFrame(gameLoop);
+        }
+
+        function update(secondsPassed) {
+            // Set the speed of the objects. It will move x pixels per second.
+            var movingSpeed = 50;
+
+            // Move the objects
+            rectX += (movingSpeed * secondsPassed);
+            rectY += (movingSpeed * secondsPassed);
+        }
+
+        function draw(secondsPassed) {
+            // Clear the canvas
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Fill with red
+            context.fillStyle = '#ff8080';
+
+            // Draw a rectangle on the canvas
+            context.fillRect(rectX, rectY, 200, 175);
+
+						// fps info
+						context.fillStyle = '#000000';
+						context.fillText("FPS: " + Math.round(1/secondsPassed), 10, 20)
+        }
+    </script>
+</body>
+
+</html>
