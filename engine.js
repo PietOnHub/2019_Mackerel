@@ -23,6 +23,8 @@ function gameLoop(timeStamp) {
     gameObjects[i].update(secondsPassed);
   }
 
+  detectCollisions();
+
   clearCanvas();
 
   for (var i = 0; i < gameObjects.length; i++) {
