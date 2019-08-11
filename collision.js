@@ -1,4 +1,12 @@
-function detectCollisions(){
+function checkCollisions(){
+  var plasticity = 0.8;
+
+  detectCollisions(plasticity);
+  detectColissionsGround(plasticity);
+  detectColissionsSide(plasticity);
+}
+
+function detectCollisions(plasticity){
   var obj1;
   var obj2;
 
@@ -56,7 +64,7 @@ function detectCollisions(){
   }
 }
 
-function detectColissionsGround(){
+function detectColissionsGround(plasticity){
   var obj1;
   for (var i=0; i< gameObjects.length; i++) {
     obj1 = gameObjects[i];
@@ -66,7 +74,7 @@ function detectColissionsGround(){
   }
 }
 
-function detectColissionsSide(){
+function detectColissionsSide(plasticity){
   var obj1;
   for (var i=0; i< gameObjects.length; i++) {
     obj1 = gameObjects[i];

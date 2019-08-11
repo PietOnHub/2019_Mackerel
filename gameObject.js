@@ -1,7 +1,4 @@
 
-//Set gravitational acceleration
- var g = 9.81;
-
 class GameObject
 {
     constructor (context, x, y, vx, vy, fraction){

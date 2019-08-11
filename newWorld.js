@@ -1,13 +1,12 @@
-var gameObjects = [];
-var plasticity = 0.8;
-
-
 
 function createWorld(){
-
   var spawning;
   startSpawning();
+}
 
+function checkSpawnEnd(){
+  if (gameObjects.length >= 1000)
+    stopSpawning();
 }
 
 function startSpawning(){
@@ -31,7 +30,6 @@ function startSpawning(){
         // fraction
         Math.round(Math.random()+0.1))
         );
-
   }, 100);
 }
 
