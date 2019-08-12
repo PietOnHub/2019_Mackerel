@@ -54,8 +54,6 @@ class BoatClass extends GameObject
       //Move with set velocity
       this.x += this.vx * secondsPassed;
       this.y += this.vy * secondsPassed;
-      console.log(this.strength)
-      console.log(this.mass)
 
     }
 }
