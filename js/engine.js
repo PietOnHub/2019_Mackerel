@@ -1,14 +1,4 @@
-//globals
-var g = 9.81;
-var gameObjects = [];
-var oldTimeStamp = 0;
-var secondsPassed = 0;
-var secondsPassedTotal = 0;
-var gameRunning = false;
 
-// define the canvas to paint the game content
-var canvas;
-var context;
 
 function init() {
 
@@ -36,6 +26,9 @@ function gameLoop(timeStamp) {
   secondsPassed = (timeStamp - oldTimeStamp) / 1000;
   secondsPassedTotal += secondsPassed;
   oldTimeStamp = timeStamp;
+
+  // check for eventes
+  Controls.ListenToKeyboard();
 
   // sorting out obsolete contents before next loop
   gameObjects = gameObjects.filter(function(value, index, arr){
@@ -79,8 +72,7 @@ function clearCanvas(){
 }
 
 function drawEngineInfo(secondsPassed, secondsPassedTotal) {
-  context.fillStyle = '#000000';
-  context.fillText("FPS: " + Math.round(1/secondsPassed), 10, 20);
-  context.fillText("Obj#: " + gameObjects.length, 10, 40);
-  context.fillText("time: " + Math.round(secondsPassedTotal), 10, 60);
+  document.getElementById('mainFPS').innerHTML = "FPS: " + Math.round(1/secondsPassed)
+  document.getElementById('mainObjCount').innerHTML = "Obj#: " + gameObjects.length;
+  document.getElementById('mainTimer').innerHTML = "time: " + Math.round(secondsPassedTotal);
 }

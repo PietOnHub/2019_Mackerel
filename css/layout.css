@@ -1,0 +1,41 @@
+.mainWrapper{
+  width: 100%;
+  height: 100%;
+}
+
+.mainScreen{
+  position: absolute;
+  top: 0;
+  width:60%;
+  margin-top:2%;
+  margin-left:20%;
+  padding-top: 70%;
+}
+
+canvas {
+  position:absolute;
+  width:96%;
+  top:5%;
+  height:auto;
+  left:2%;
+}
+
+.mainTitle{
+  position: absolute;
+  top:1%;
+  width: 100%;
+}
+
+.mainInfo{
+  position: absolute;
+  width: 25%;
+  top: 6%;
+  left: 3%;
+}
+
+.mackerelOS{
+  position:absolute;
+  left:3%;
+  bottom: 6%;
+  width:40%;
+}

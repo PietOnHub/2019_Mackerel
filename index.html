@@ -2,22 +2,62 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <title>game</title>
-  <meta name="description" content="game">
-  <meta name="author" content="Piet">
+  <!--link rel="apple-touch-icon" sizes="120x120" href="media/icon-iphone-retina.png"-->
 
-  <script src="engine.js"></script>
-  <script src="gameObject.js"></script>
-  <script src='collision.js'></script>
-  <script src="newWorld.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen"/>
+
+  <meta name="description" content="mackerel game">
+  <meta name="author" content="PietOnHub">
+
+  <title> Mackerel </title>
+
+  <script src="js/globals.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/gameObject.js"></script>
+  <script src="js/boat.js"></script>
+  <script src='js/collision.js'></script>
+  <script src="js/newWorld.js"></script>
+  <script src="js/controls.js"></script>
+
 </head>
 
-<body>
-  <canvas id="canvas" width="1000" height="500" style="border:1px solid lightgrey; width:100%;">
-      Your browser does not support the HTML5 canvas tag.
-  </canvas>
+<body scroll="no" style="overflow: hidden">
+
+  <div class="mainWrapper">
+
+    <div class="mainScreen">
+
+      <div class="mainTitle">
+        <span class="mainTitleText">..=~*  M4CK3R3L  *~=..</span>
+      </div>
+
+      <canvas id="canvas" width="1000" height="1000" style='z-index:0'> noCanvas! </canvas>
+
+      <div class="mainInfo">
+        <p id="mainFPS">FPS: 0</p>
+        <p id="mainTimer">TIME: 0</p>
+        <p id="mainObjCount">OBJ#: 0</p>
+      </div>
+
+      <div class="mackerelOS">
+        <span> mackerelOS 0.2.0 </span>
+      </div>
+
+      <div class="mainEcholot">
+      </div>
+
+    </div>
+
+
+  </div>
+
   <script>
 
     "use strict";

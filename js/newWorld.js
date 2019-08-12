@@ -1,7 +1,10 @@
 
+var Boat = {};
+
 function createWorld(){
   var spawning;
   startSpawning();
+  createBoat();
 }
 
 function checkSpawnEnd(){
@@ -32,6 +35,26 @@ function startSpawning(){
         );
   }, 100);
 }
+
+function createBoat() {
+  Boat = new BoatClass(
+    context,
+    // xpos init
+    canvas.width/2,
+    // ypos init
+    canvas.height/2,
+    // xvel init
+    0,
+    // yvel init
+    0,
+    // diameter init
+    40,
+    // fraction
+    2
+  )
+  gameObjects.push(Boat)
+}
+
 
 function stopSpawning() {
   clearInterval(spawning)
