@@ -4,17 +4,17 @@ class BoatClass extends GameObject
         super(context, x, y, vx, vy, fraction);
 
         //Set default width and height
+
         this.radius = radius;
         this.mass = Math.PI*radius*radius;
         this.throttle = 0;
         this.angle = 0;
+        this.strength = 0.2;
     }
 
 
     setThrottle(val){
-      this.throttle += val;
-      this.vx +=  this.throttle*Math.sin(2*this.angle/Math.PI);
-      this.vy +=  this.throttle*Math.cos(2*this.angle/Math.PI);
+      this.vy += val
     }
 
     getThrottle (){
@@ -22,14 +22,15 @@ class BoatClass extends GameObject
     }
 
     setSteer(val){
-      this.angle += val;
+      this.vx += val
     }
-
 
 
     draw(){
 
-        this.color = 'rgba(100,100,100,0.5)';
+
+
+        this.color = 'rgba(100,100,255,'+ this.strength +')';
 
         //Draw a simple square
         this.context.fillStyle = this.color;
@@ -40,9 +41,21 @@ class BoatClass extends GameObject
 
     update(secondsPassed){
 
+      if (Key.isDown(Key.UP))
+        this.setThrottle(-5);
+      else if (Key.isDown(Key.DOWN))
+        this.setThrottle(5);
+
+      if (Key.isDown(Key.LEFT))
+        this.setSteer(-5);
+      else if (Key.isDown(Key.RIGHT))
+        this.setSteer(5);
+
       //Move with set velocity
       this.x += this.vx * secondsPassed;
       this.y += this.vy * secondsPassed;
+      console.log(this.strength)
+      console.log(this.mass)
 
     }
 }

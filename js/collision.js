@@ -46,11 +46,12 @@ function detectCollisions(plasticity){
           obj2.vy += (impulse * obj1.mass * vCollisionNorm.y);
         }
         if (obj1.fraction != obj2.fraction){
-          if (obj1.mass > obj2.mass)
+          if (obj1.mass < obj2.mass)
           {
             obj1.radius = obj1.radius - 0.05 * obj2.radius**0.5;
             obj2.mass = obj2.mass + 0.05 * Math.PI * obj2.radius**2;
             obj2.strength += 0.05;
+
           }
           else if (obj2.mass >= obj1.mass)
           {
