@@ -27,7 +27,10 @@ function gameLoop(timeStamp) {
   secondsPassedTotal += secondsPassed;
   oldTimeStamp = timeStamp;
 
-  // check for eventes
+  //////////////////////////////////////////////
+  // LISTENERS ---------------------------------
+
+  // listen to keyboard input
   Controls.ListenToKeyboard();
 
   // sorting out obsolete contents before next loop
@@ -35,20 +38,23 @@ function gameLoop(timeStamp) {
     return value.obsolete == false;
   });
 
+  //////////////////////////////////////////////
   // UPDATE ------------------------------------
+
   // updating the objects
   for (var i = 0; i < gameObjects.length; i++) {
     gameObjects[i].update(secondsPassed);
   }
 
+  //////////////////////////////////////////////
   // CHECKS ------------------------------------
-  // check for end of spawning
-  checkSpawnEnd();
 
   // check for collisions
   checkCollisions();
 
-  // VIEW --------------------------------------
+  //////////////////////////////////////////////
+  // DRAW --------------------------------------
+
   // clear the view from last state
   clearCanvas();
 
@@ -58,7 +64,7 @@ function gameLoop(timeStamp) {
   }
 
   // draw the engine info
-  drawEngineInfo(secondsPassed, secondsPassedTotal);
+  drawInfo(secondsPassed, secondsPassedTotal);
 
   // LOOP AND STOP CONDITION ---------------------
   // gameRunning is currently set to be always true
@@ -71,7 +77,7 @@ function clearCanvas(){
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function drawEngineInfo(secondsPassed, secondsPassedTotal) {
+function drawInfo(secondsPassed, secondsPassedTotal) {
   document.getElementById('mainFPS').innerHTML = "FPS: " + Math.round(1/secondsPassed)
   document.getElementById('mainObjCount').innerHTML = "Obj#: " + gameObjects.length;
   document.getElementById('mainTimer').innerHTML = "time: " + Math.round(secondsPassedTotal);

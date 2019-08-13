@@ -1,6 +1,10 @@
-///////////////////////////////////////////////////////////////////////////////
-// Controls
+//////////////////////////////////////////////
+// CONTROLS ---------------------------------_
+
+var Controls = {};
+
 var Key = {
+
   _pressed: {},
 
   LEFT: 37,
@@ -22,11 +26,7 @@ var Key = {
 };
 
 
-var Controls = {};
-
 Controls.ListenToKeyboard = function(){
-
   window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
   window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, false);
-
 };

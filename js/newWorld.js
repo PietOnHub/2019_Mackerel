@@ -31,8 +31,10 @@ function startSpawning(){
         // diameter init
         radius,
         // fraction
-        Math.round(Math.random()+0.1))
+        Math.round(Math.random()+0.0))
         );
+      if (gameObjects.length >= 100)
+        clearInterval(spawning)
   }, 100);
 }
 
@@ -53,9 +55,4 @@ function createBoat() {
     2
   )
   gameObjects.push(Boat)
-}
-
-
-function stopSpawning() {
-  clearInterval(spawning)
 }

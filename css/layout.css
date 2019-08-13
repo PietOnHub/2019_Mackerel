@@ -1,66 +1,80 @@
-
 *{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border: 1px solid black;
-  margin: 0%;
-  padding: 0%;
 }
 
-.viewWrapper {
-  max-width: 800px;
-  margin: auto;
+html, body{
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.viewInfo {
+  padding: 0.2em;
+}
+
+.viewInfoItem {
+  display: inline;
+}
+
+
+@media (min-aspect-ratio: 2/1) {
+  .viewWrapper {
+    max-width: 1200px;
+    width: 68%;
+    margin: auto;
+    height:auto;
+  }
+}
+
+@media (max-aspect-ratio: 2/1) {
+  .viewWrapper {
+    max-width: 1200px;
+    width: 84%;
+    margin: auto;
+    height:auto;
+  }
 }
 
 .viewGame {
-  background-color: yellow;
-  margin-left: 3%;
-  margin-right: 3%;
-  margin-top: 1%;
+  margin: 2%;
 }
 
 .viewHeader{
-  background-color: red;
   text-align: center;
-
+  padding: 0.2em;
 }
 
 .viewContent {
-  background: darkred;
-  margin: 1%;
   display: flex;
 }
 
 .viewContentLeft {
-  background: white;
-  flex: 0 0 50%;
+  flex: 0 0 62%;
+  margin: 1%;
 }
 
 .viewContentLeftCanvas {
-  background: lightblue;
-}
-
-.viewContentLeftInfo {
-  background: lightgreen;
+  margin: 1%;
 }
 
 .viewContentRight {
-  background: orange;
   flex: 1;
 }
 
 .viewContentRightEcholot {
-  background: violet;
   text-align: center;
-  height: 50%;
-
+  height: 48%;
+  margin: 2%;
 }
 
 .viewContentRightButtons {
-  background: grey;
   text-align: center;
-  height: 50%;
+  height: 48%;
+  margin: 2%;
 }
 
 .viewFooter{
-  background-color: green;
+  padding: 0.2em;
 }

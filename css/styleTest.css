@@ -1,10 +1,9 @@
+
 *{
   border: 1px solid black;
 }
 
 body{
-  background-image: url("../media/bg_snails.png");
-  font-family: 'Lato', Calibri, sans-serif;
   font-weight: 100;
 }
 
@@ -13,22 +12,27 @@ body{
 }
 
 .viewWrapper {
+  background: aqua;
 }
 
 .viewGame {
-  background: grey;;
+  background: yellow;
 }
 
 .viewHeader{
+  background: red;
 }
 
 .viewContent {
+  background: darkred;
 }
 
 .viewContentLeft {
+  background: white;
 }
 
 .viewContentLeftCanvas {
+  background: darkblue;
 }
 
 canvas {
@@ -36,13 +40,17 @@ canvas {
 }
 
 .viewContentRight {
+  background: orange;
 }
 
 .viewContentRightEcholot {
+  background: violet;
 }
 
 .viewContentRightButtons {
+  background: grey;
 }
 
 .viewFooter{
+  background: green;
 }

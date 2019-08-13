@@ -53,7 +53,7 @@ function detectCollisions(plasticity){
             obj2.strength += 0.05;
 
           }
-          else if (obj2.mass >= obj1.mass)
+          else if (obj1.mass >= obj2.mass)
           {
             obj2.radius = obj2.radius - 0.05 * obj1.radius**0.5;
             obj1.mass = obj1.mass + 0.05 * Math.PI* obj1.radius**2;

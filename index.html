@@ -10,7 +10,7 @@
 
   <!--link rel='apple-touch-icon' sizes='120x120' href='media/icon-iphone-retina.png'-->
 
-  <link rel='stylesheet' type='text/css' href='css/style.css' media='screen'/>
+  <link rel='stylesheet' type='text/css' href='css/styleTest.css' media='screen'/>
   <link rel='stylesheet' type='text/css' href='css/layout.css' media='screen'/>
 
   <meta name='description' content='mackerel game'>
@@ -19,7 +19,7 @@
   <title> Mackerel </title>
 
   <script src='js/globals.js'></script>
-  <script src='js/engine.js'></script>
+  <script src='js/engine/gameLoop.js'></script>
   <script src='js/gameObject.js'></script>
   <script src='js/boat.js'></script>
   <script src='js/collision.js'></script>
@@ -29,6 +29,12 @@
 </head>
 
 <body scroll='no' style='overflow: hidden'>
+
+<div class='viewInfo'>
+  <p class='viewInfoItem' id='mainFPS'>FPS: 0</p>
+  <p class='viewInfoItem' id='mainTimer'>TIME: 0</p>
+  <p class='viewInfoItem' id='mainObjCount'>OBJ#: 0</p>
+</div>
 
 <div class='viewWrapper'>
   <div class='viewGame'>
@@ -41,7 +47,7 @@
 
       <div class='viewContentLeft'>
         <div class='viewContentLeftCanvas'>
-            <canvas id='canvas' width='800' height='800' style='z-index:0; width:100%'> noCanvas! </canvas>
+            <canvas id='canvas' width='800' height='600' style='z-index:0; width: 100%'> noCanvas! </canvas>
         </div>
       </div>
 
@@ -63,11 +69,6 @@
   </div>
 </div>
 
-<div class='viewContentLeftInfo'>
-  <p id='mainFPS'>FPS: 0</p>
-  <p id='mainTimer'>TIME: 0</p>
-  <p id='mainObjCount'>OBJ#: 0</p>
-</div>
 
   <script>
 
