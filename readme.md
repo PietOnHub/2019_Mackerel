@@ -1,4 +1,8 @@
 
+# 0.3.0 - (partwise) responsive layout and styling
+
+- basic gui implemented 
+
 # 0.2.0 - first layout concept and movable 'hero'
 
 - some css implementations for layout and style. still in draft

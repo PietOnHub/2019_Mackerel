@@ -10,7 +10,7 @@
 
   <!--link rel='apple-touch-icon' sizes='120x120' href='media/icon-iphone-retina.png'-->
 
-  <link rel='stylesheet' type='text/css' href='css/styleTest.css' media='screen'/>
+  <link rel='stylesheet' type='text/css' href='css/style.css' media='screen'/>
   <link rel='stylesheet' type='text/css' href='css/layout.css' media='screen'/>
 
   <meta name='description' content='mackerel game'>
@@ -19,6 +19,7 @@
   <title> Mackerel </title>
 
   <script src='js/globals.js'></script>
+  <script src='js/windowResize.js'></script>
   <script src='js/engine/gameLoop.js'></script>
   <script src='js/gameObject.js'></script>
   <script src='js/boat.js'></script>
@@ -31,16 +32,16 @@
 <body scroll='no' style='overflow: hidden'>
 
 <div class='viewInfo'>
-  <p class='viewInfoItem' id='mainFPS'>FPS: 0</p>
-  <p class='viewInfoItem' id='mainTimer'>TIME: 0</p>
-  <p class='viewInfoItem' id='mainObjCount'>OBJ#: 0</p>
+  <span class='viewInfoItem' id='mainFPS'>FPS: 0</span>
+  <span class='viewInfoItem' id='mainTimer'>TIME: 0</span>
+  <span class='viewInfoItem' id='mainObjCount'>OBJ#: 0</span>
 </div>
 
-<div class='viewWrapper'>
-  <div class='viewGame'>
+<div id= 'wrapper' class='viewWrapper'>
+  <div id= 'viewGame' class='viewGame'>
 
     <div class='viewHeader'>
-      <span class='mainTitleText'>..=~*  M4CK3R3L  *~=..</span>
+      <span class='viewHeaderText'>..=~*  M4CK3R3L  *~=..</span>
     </div>
 
     <div class='viewContent'>
@@ -53,17 +54,17 @@
 
       <div class='viewContentRight'>
         <div class='viewContentRightEcholot'>
-          <span> Echolot </span>
+          <span class='viewHeaderText'> Echolot </span>
         </div>
         <div class='viewContentRightButtons'>
-          <span> Buttons </span>
+          <span class='viewHeaderText'> Buttons </span>
         </div>
       </div>
 
     </div>
 
     <div class='viewFooter'>
-      <span> MackerelOS 0.2.0 </span>
+      <span class='viewFooterText'> &copy MackerelOS 0.2.0 </span>
     </div>
 
   </div>
@@ -71,6 +72,8 @@
 
 
   <script>
+
+    var ratio = 5/3;
 
     'use strict';
     window.onload = init();

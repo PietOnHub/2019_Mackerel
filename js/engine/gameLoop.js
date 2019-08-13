@@ -2,6 +2,8 @@
 
 function init() {
 
+  resizeGame();
+
   // set globals to initial state
   gameObjects = [];
   oldTimeStamp = 0;
@@ -55,6 +57,9 @@ function gameLoop(timeStamp) {
   //////////////////////////////////////////////
   // DRAW --------------------------------------
 
+  window.addEventListener('resize', resizeGame, false);
+  window.addEventListener('orientationchange', resizeGame, false);
+
   // clear the view from last state
   clearCanvas();
 
@@ -78,7 +83,7 @@ function clearCanvas(){
 }
 
 function drawInfo(secondsPassed, secondsPassedTotal) {
-  document.getElementById('mainFPS').innerHTML = "FPS: " + Math.round(1/secondsPassed)
-  document.getElementById('mainObjCount').innerHTML = "Obj#: " + gameObjects.length;
-  document.getElementById('mainTimer').innerHTML = "time: " + Math.round(secondsPassedTotal);
+  document.getElementById('mainFPS').innerHTML = "FPS:" + Math.round(1/secondsPassed)
+  document.getElementById('mainObjCount').innerHTML = "Objects:" + gameObjects.length;
+  document.getElementById('mainTimer').innerHTML = "Time:" + Math.round(secondsPassedTotal) + 's';
 }

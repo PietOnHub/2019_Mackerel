@@ -7,10 +7,6 @@ function createWorld(){
   createBoat();
 }
 
-function checkSpawnEnd(){
-  if (gameObjects.length >= 1000)
-    stopSpawning();
-}
 
 function startSpawning(){
 
@@ -33,9 +29,9 @@ function startSpawning(){
         // fraction
         Math.round(Math.random()+0.0))
         );
-      if (gameObjects.length >= 100)
+      if (gameObjects.length >= 10000)
         clearInterval(spawning)
-  }, 100);
+  }, 10);
 }
 
 function createBoat() {

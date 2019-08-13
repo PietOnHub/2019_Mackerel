@@ -1,25 +1,46 @@
-*{
-  border: 1px solid black;
-}
-
 body{
-  background-image: url("../media/bg_snails.png");
+  background-image: url("../media/bg_mackerels.png");
   font-family: 'Lato', Calibri, sans-serif;
-  font-weight: 100;
+  font-size: 3vh;
 }
 
 .viewInfo {
-  background: lightgreen;
+  font-size: 3vh;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.viewInfoItem {
+  color:  rgba(127, 255, 212,1);
+  padding-left: 1vh;
 }
 
 .viewWrapper {
 }
 
 .viewGame {
-  background: grey;;
+  background-color:  #212f3d ;
+  z-index: -20;
+  border-radius:15px;
+  border-style: solid;
+  border-color:  #2e2b32 ;
+  border-width: 4px;
+  box-shadow: inset 0 0 20px 4px rgba(0,0,0,1), 0 0 10px 2px rgba(0,0,0,1);
 }
 
-.viewHeader{
+.viewHeader {
+  padding: 2.5vh;
+}
+
+.viewHeaderText {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 3.5vh;
+  background-color: black;
+  color:white;
+  border-style:none;
+  border-radius: 1px;
+  padding-top: 0.5vh;
+  padding-left: 1.5vh;
+  padding-right: 1.5vh;
 }
 
 .viewContent {
@@ -29,20 +50,36 @@ body{
 }
 
 .viewContentLeftCanvas {
+
 }
 
 canvas {
-  background: blue;
+  border-radius:25px;
+  border-style: solid;
+  border-color:  #2e2b32 ;
+  background-color: white;
+  border-width: 6px;
+  box-shadow: inset 0 0 50px 10px rgba(0,100,20,0.7), 0 0px 10px 2px rgba(0,0,0,1);
 }
 
 .viewContentRight {
 }
 
 .viewContentRightEcholot {
+  padding: 0.5vh;
 }
 
 .viewContentRightButtons {
+  padding: 0.5vh;
 }
 
 .viewFooter{
+}
+
+.viewFooterText {
+  padding-left: 5vh;
+  color: red;
+  font-size: 3.5vh;
+  font-weight: 200;
+  text-shadow: 0 0 1px white;
 }
