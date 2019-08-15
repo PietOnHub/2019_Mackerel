@@ -21,14 +21,14 @@ function gameLoop(timeStamp) {
     Game.gameObjects[i].update(Game.secondsPassed);
   }
 
-  // check for collisions
+  // checking for collisions
   Collision.checkCollisions();
 
-  window.addEventListener('resize', Tools.resizeGame, false);
-  window.addEventListener('orientationchange', Tools.resizeGame, false);
+  // checking for window proportions
+  Tools.checkWindowResize();
 
   // clear the view from last state
-  clearCanvas();
+  Tools.clearCanvas(Game.context, Game.canvas);
 
   // draw the current state
   for (var i = 0; i < Game.gameObjects.length; i++) {
@@ -36,20 +36,9 @@ function gameLoop(timeStamp) {
   }
 
   // draw the engine info
-  drawInfo(Game.secondsPassed, Game.secondsPassedTotal);
+  Tools.drawInfo(Game.secondsPassed, Game.secondsPassedTotal);
 
   // gameRunning is currently set to be always true
-  if (gameRunning)
+  if (Game.running)
     window.requestAnimationFrame(gameLoop);
-}
-
-
-function clearCanvas(){
-  Game.context.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-function drawInfo(secondsPassed, secondsPassedTotal) {
-  document.getElementById('mainFPS').innerHTML = "FPS:" + Math.round(1/Game.secondsPassed)
-  document.getElementById('mainObjCount').innerHTML = "Objects:" + Game.gameObjects.length;
-  document.getElementById('mainTimer').innerHTML = "Time:" + Math.round(Game.secondsPassedTotal) + 's';
-}
+};

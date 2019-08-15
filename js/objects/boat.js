@@ -1,3 +1,4 @@
+
 class BoatClass extends GameObject
 {
     constructor (context, x, y, vx, vy, radius, fraction){
@@ -10,6 +11,10 @@ class BoatClass extends GameObject
         this.throttle = 0;
         this.angle = 0;
         this.strength = 0.2;
+
+        this.sprite = new Image();
+        this.sprite.src = 'media/boat.png';
+
     }
 
 
@@ -32,25 +37,27 @@ class BoatClass extends GameObject
 
         this.color = 'rgba(100,100,255,'+ this.strength +')';
 
-        
+
         this.context.fillStyle = this.color;
         this.context.beginPath();
         this.context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
         this.context.fill();
 
-        this.context.drawImage(Media.Boat, this.x-25, this.y-50);
+        this.context.drawImage(this.sprite, this.x-25, this.y-50);
     }
 
     update(secondsPassed){
 
       if (Key.isDown(Key.UP))
         this.setThrottle(-5);
-      else if (Key.isDown(Key.DOWN))
+
+      if (Key.isDown(Key.DOWN))
         this.setThrottle(5);
 
       if (Key.isDown(Key.LEFT))
         this.setSteer(-5);
-      else if (Key.isDown(Key.RIGHT))
+
+      if (Key.isDown(Key.RIGHT))
         this.setSteer(5);
 
       //Move with set velocity

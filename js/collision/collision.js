@@ -8,20 +8,20 @@ Collision.checkCollisions = function(){
   // left kinematic energy after contact
   var plasticity = 0.8;
 
-  Collision.detectCollisionObjects(plasticity);
-  Collision.detectColissionsGround(plasticity);
-  Collision.detectColissionsSide(plasticity);
-}
-
-Collision.detectCollisionObjects = function(plasticity){
-
-  var obj1;
-  var obj2;
-
   // Reset collision state of all objects
   for (var i = 0; i < Game.gameObjects.length; i++) {
     Game.gameObjects[i].isColliding = false;
   }
+
+  Collision.detectCollisionsObjects(plasticity);
+  Collision.detectColissionsGround(plasticity);
+  Collision.detectColissionsSide(plasticity);
+}
+
+Collision.detectCollisionsObjects = function(plasticity){
+
+  var obj1;
+  var obj2;
 
   // Start checking for collisions
   for (var i = 0; i < Game.gameObjects.length; i++)

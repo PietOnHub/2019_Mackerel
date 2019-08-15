@@ -1,13 +1,8 @@
 
 
-var Media = {};
-Media.Boat = new Image();
-Media.Boat.src = 'media/boat.png';
-
-
 function createWorld(){
   var spawning;
-  startSpawning();
+  //startSpawning();
   createBoat();
 }
 

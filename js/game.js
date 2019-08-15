@@ -9,13 +9,12 @@ Game.gameObjects = [];
 Game.oldTimeStamp = 0;
 Game.secondsPassed = 0;
 Game.secondsPassedTotal = 0;
-Game.gameRunning = false;
-
-// define the canvas to paint the game content
+Game.running = false;
 
 
 Game.init = function() {
 
+  // fitting game to device display
   Tools.resizeGame();
 
   // set globals to initial state
@@ -32,6 +31,6 @@ Game.init = function() {
   createWorld();
 
   // start the gameLoop
-  gameRunning = true;
+  Game.running = true;
   window.requestAnimationFrame(gameLoop);
 }

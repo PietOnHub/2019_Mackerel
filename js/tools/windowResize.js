@@ -1,4 +1,10 @@
-var Tools = {};
+//////////////////////////////////////////////
+// GETTING width/height OF WINDOW ------------
+
+Tools.checkWindowResize = function () {
+  window.addEventListener('resize', Tools.resizeGame, false);
+  window.addEventListener('orientationchange', Tools.resizeGame, false);
+};
 
 Tools.resizeGame = function () {
 
@@ -24,4 +30,4 @@ Tools.resizeGame = function () {
   var viewGame = document.getElementById('viewGame');
   viewGame.width = newWidth;
   viewGame.height = newHeight;
-}
+};
