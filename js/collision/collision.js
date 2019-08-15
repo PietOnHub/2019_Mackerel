@@ -1,31 +1,39 @@
-function checkCollisions(){
+//////////////////////////////////////////////
+// COLISSION ---------------------------------
+
+var Collision = {};
+
+Collision.checkCollisions = function(){
+
+  // left kinematic energy after contact
   var plasticity = 0.8;
 
-  detectCollisions(plasticity);
-  detectColissionsGround(plasticity);
-  detectColissionsSide(plasticity);
+  Collision.detectCollisionObjects(plasticity);
+  Collision.detectColissionsGround(plasticity);
+  Collision.detectColissionsSide(plasticity);
 }
 
-function detectCollisions(plasticity){
+Collision.detectCollisionObjects = function(plasticity){
+
   var obj1;
   var obj2;
 
   // Reset collision state of all objects
-  for (var i = 0; i < this.gameObjects.length; i++) {
-    this.gameObjects[i].isColliding = false;
+  for (var i = 0; i < Game.gameObjects.length; i++) {
+    Game.gameObjects[i].isColliding = false;
   }
 
   // Start checking for collisions
-  for (var i = 0; i < gameObjects.length; i++)
+  for (var i = 0; i < Game.gameObjects.length; i++)
   {
-    obj1 = gameObjects[i];
-    for (var j = i + 1; j < gameObjects.length; j++)
+    obj1 = Game.gameObjects[i];
+    for (var j = i + 1; j < Game.gameObjects.length; j++)
     {
 
-      obj2 = gameObjects[j];
+      obj2 = Game.gameObjects[j];
 
       // Compare object1 with object2
-      if (circleIntersect(obj1.x, obj1.y, obj1.radius, obj2.x, obj2.y, obj2.radius)){
+      if (Collision.circleIntersect(obj1.x, obj1.y, obj1.radius, obj2.x, obj2.y, obj2.radius)){
         obj1.isColliding = true;
         obj2.isColliding = true;
 
@@ -65,29 +73,27 @@ function detectCollisions(plasticity){
   }
 }
 
-function detectColissionsGround(plasticity){
+Collision.detectColissionsGround = function(plasticity){
   var obj1;
-  for (var i=0; i< gameObjects.length; i++) {
-    obj1 = gameObjects[i];
+  for (var i=0; i< Game.gameObjects.length; i++) {
+    obj1 = Game.gameObjects[i];
     if (obj1.y + obj1.radius >= canvas.height) {
       obj1.vy = (-plasticity) * obj1.vy;
     };
   }
 }
 
-function detectColissionsSide(plasticity){
+Collision.detectColissionsSide = function(plasticity){
   var obj1;
-  for (var i=0; i< gameObjects.length; i++) {
-    obj1 = gameObjects[i];
+  for (var i=0; i< Game.gameObjects.length; i++) {
+    obj1 = Game.gameObjects[i];
     if (obj1.x + obj1.radius >= canvas.width || obj1.x - obj1.radius <= 0) {
       obj1.vx = (-plasticity) * obj1.vx;
     }
   }
 }
 
-function circleIntersect(x1, y1, r1, x2, y2, r2){
-
+Collision.circleIntersect = function(x1, y1, r1, x2, y2, r2){
   var squareDistance = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
-
   return squareDistance <= ((r1 + r2) * (r1 + r2))
 }

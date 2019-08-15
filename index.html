@@ -18,14 +18,16 @@
 
   <title> Mackerel </title>
 
-  <script src='js/globals.js'></script>
-  <script src='js/windowResize.js'></script>
+  <script src='js/game.js'></script>
   <script src='js/engine/gameLoop.js'></script>
-  <script src='js/gameObject.js'></script>
-  <script src='js/boat.js'></script>
-  <script src='js/collision.js'></script>
-  <script src='js/newWorld.js'></script>
-  <script src='js/controls.js'></script>
+  <script src='js/controls/controls.js'></script>
+  <script src='js/objects/gameObject.js'></script>
+  <script src='js/objects/boat.js'></script>
+  <script src='js/collision/collision.js'></script>
+  <script src='js/world/newWorld.js'></script>
+
+
+  <script src='js/tools/windowResize.js'></script>
 
 </head>
 
@@ -76,7 +78,7 @@
     var ratio = 5/3;
 
     'use strict';
-    window.onload = init();
+    window.onload = Game.init();
 
   </script>
 </body>

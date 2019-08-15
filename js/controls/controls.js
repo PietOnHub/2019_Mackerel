@@ -1,5 +1,5 @@
 //////////////////////////////////////////////
-// CONTROLS ---------------------------------_
+// CONTROLS ----------------------------------
 
 var Controls = {};
 
@@ -26,7 +26,7 @@ var Key = {
 };
 
 
-Controls.ListenToKeyboard = function(){
+Controls.listenToKeyboard = function(){
   window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
   window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, false);
 };

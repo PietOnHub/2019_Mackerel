@@ -1,5 +1,9 @@
 
-var Boat = {};
+
+var Media = {};
+Media.Boat = new Image();
+Media.Boat.src = 'media/boat.png';
+
 
 function createWorld(){
   var spawning;
@@ -14,10 +18,10 @@ function startSpawning(){
 
       var radius = (Math.random()**2)*17+3;
 
-      gameObjects.push(new Circle(
-        context,
+      Game.gameObjects.push(new Circle(
+        Game.context,
         // xpos init
-        Math.random()*200+(canvas.width/2)-100,
+        Math.random()*200+(Game.canvas.width/2)-100,
         // ypos init
         -radius,
         // xvel init
@@ -29,14 +33,14 @@ function startSpawning(){
         // fraction
         Math.round(Math.random()+0.0))
         );
-      if (gameObjects.length >= 10000)
+      if (Game.gameObjects.length >= 10000)
         clearInterval(spawning)
   }, 10);
 }
 
 function createBoat() {
   Boat = new BoatClass(
-    context,
+    Game.context,
     // xpos init
     canvas.width/2,
     // ypos init
@@ -50,5 +54,5 @@ function createBoat() {
     // fraction
     2
   )
-  gameObjects.push(Boat)
+  Game.gameObjects.push(Boat)
 }

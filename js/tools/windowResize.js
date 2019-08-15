@@ -1,4 +1,6 @@
-function resizeGame() {
+var Tools = {};
+
+Tools.resizeGame = function () {
 
   var gameArea = document.getElementById('wrapper');
   var widthToHeight = ratio;
@@ -22,5 +24,4 @@ function resizeGame() {
   var viewGame = document.getElementById('viewGame');
   viewGame.width = newWidth;
   viewGame.height = newHeight;
-
 }

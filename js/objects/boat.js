@@ -32,11 +32,13 @@ class BoatClass extends GameObject
 
         this.color = 'rgba(100,100,255,'+ this.strength +')';
 
-        //Draw a simple square
+        
         this.context.fillStyle = this.color;
         this.context.beginPath();
         this.context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
         this.context.fill();
+
+        this.context.drawImage(Media.Boat, this.x-25, this.y-50);
     }
 
     update(secondsPassed){
