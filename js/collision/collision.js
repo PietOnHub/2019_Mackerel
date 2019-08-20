@@ -6,7 +6,7 @@ var Collision = {};
 Collision.checkCollisions = function(){
 
   // left kinematic energy after contact
-  var plasticity = 0.8;
+  var plasticity = 0.9;
 
   // Reset collision state of all objects
   for (var i = 0; i < Game.gameObjects.length; i++) {
@@ -14,8 +14,7 @@ Collision.checkCollisions = function(){
   }
 
   Collision.detectCollisionsObjects(plasticity);
-  Collision.detectColissionsGround(plasticity);
-  Collision.detectColissionsSide(plasticity);
+  Collision.detectColissionsBorder(plasticity);
 }
 
 Collision.detectCollisionsObjects = function(plasticity){
@@ -53,39 +52,21 @@ Collision.detectCollisionsObjects = function(plasticity){
           obj2.vx += (impulse * obj1.mass * vCollisionNorm.x);
           obj2.vy += (impulse * obj1.mass * vCollisionNorm.y);
         }
-        if (obj1.fraction != obj2.fraction){
-          if (obj1.mass < obj2.mass)
-          {
-            obj1.radius = obj1.radius - 0.01 * obj2.radius**0.5;
-            obj2.strength += 0.05;
-
-          }
-          else if (obj1.mass >= obj2.mass)
-          {
-            obj2.radius = obj2.radius - 0.01 * obj1.radius**0.5;
-            obj1.strength += 0.05;
-          }
-        }
       }
     }
   }
 }
 
-Collision.detectColissionsGround = function(plasticity){
+Collision.detectColissionsBorder = function(plasticity){
   var obj1;
   for (var i=0; i< Game.gameObjects.length; i++) {
-    obj1 = Game.gameObjects[i];
-    if (obj1.y + obj1.radius >= canvas.height) {
-      obj1.vy = (-plasticity) * obj1.vy;
-    };
-  }
-}
 
-Collision.detectColissionsSide = function(plasticity){
-  var obj1;
-  for (var i=0; i< Game.gameObjects.length; i++) {
     obj1 = Game.gameObjects[i];
-    if (obj1.x + obj1.radius >= canvas.width || obj1.x - obj1.radius <= 0) {
+
+    if (obj1.y + obj1.radius >= Game.bordersize || obj1.y - obj1.radius <= -Game.bordersize) {
+      obj1.vy = (-plasticity) * obj1.vy;
+    }
+    if (obj1.x + obj1.radius >= Game.bordersize || obj1.x - obj1.radius <= -Game.bordersize) {
       obj1.vx = (-plasticity) * obj1.vx;
     }
   }
