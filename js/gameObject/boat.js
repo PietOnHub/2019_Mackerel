@@ -19,7 +19,7 @@ class BoatClass extends GameObject
         2                       // fraction
       );
 
-      this.radius = 3.75;
+      this.radius = 3;
       this.cw = 0.03;
       this.rho = 1000;
       this.mass = mass;
@@ -122,37 +122,50 @@ class BoatClass extends GameObject
 
     draw(){
 
-        var dx = this.x * Game.scale_m + Game.offset_x;
-        var dy = this.y * Game.scale_m + Game.offset_y;
-        var dradius = this.radius * Game.scale_m;
+      var dx = this.x * Game.scale_m + Game.offset_x;
+      var dy = this.y * Game.scale_m + Game.offset_y;
 
-        var spriteWidth = this.sprite.tgtScale * this.sprite.width * Game.scale_m;
-        var spriteHeight = this.sprite.tgtScale * this.sprite.height * Game.scale_m;
+      var spriteWidth = this.sprite.tgtScale * this.sprite.width * Game.scale_m;
+      var spriteHeight = this.sprite.tgtScale * this.sprite.height * Game.scale_m;
+
+      if (dy+spriteHeight/2>=0.75*Game.canvas.height || dy-spriteHeight/2<=0.25*Game.canvas.height)
+        Game.scale_m = Game.scale_m * 0.995;
+      else if (dy+spriteHeight/2<=0.6*Game.canvas.height || dy-spriteHeight/2>=0.40*Game.canvas.height)
+        Game.scale_m = Game.scale_m * 1.005;
+
+      if (Game.scale_m >= Game.scale_m_max)
+        Game.scale_m = Game.scale_m_max;
+      if (Game.scale_m <= Game.scale_m_min)
+        Game.scale_m = Game.scale_m_min;
+
+      dx = this.x * Game.scale_m + Game.offset_x;
+      dy = this.y * Game.scale_m + Game.offset_y;
+      var dradius = this.radius * Game.scale_m;
+
+      spriteWidth = this.sprite.tgtScale * this.sprite.width * Game.scale_m;
+      spriteHeight = this.sprite.tgtScale * this.sprite.height * Game.scale_m;
 
 
-        this.color = 'rgba(100,100,255,'+ this.strength +')';
-        this.context.fillStyle = this.color;
-        this.context.beginPath();
-        this.context.arc(dx, dy, dradius, 0, 2*Game.pi);
-        this.context.fill();
+      this.color = 'rgba(100,100,255,'+ this.strength +')';
+      this.context.fillStyle = this.color;
+      this.context.beginPath();
+      this.context.arc(dx, dy, dradius, 0, 2*Game.pi);
+      this.context.rect(-Game.bordersize* Game.scale_m + Game.offset_x, -Game.bordersize* Game.scale_m + Game.offset_y, 2*Game.bordersize* Game.scale_m, 2*Game.bordersize* Game.scale_m);
+      this.context.fill();
 
-        this.context.translate(dx, dy);
-        this.context.rotate(+this.orientation);
-        this.context.translate(-dx, -dy);
-        this.context.drawImage(this.sprite, dx-spriteWidth/2, dy-spriteHeight/2, spriteWidth, spriteHeight);
-        this.context.translate(dx, dy);
-        this.context.rotate(-this.orientation);
-        this.context.translate(-dx, -dy);
+      this.context.translate(dx, dy);
+      this.context.rotate(+this.orientation);
+      this.context.translate(-dx, -dy);
+      this.context.drawImage(this.sprite, dx-spriteWidth/2, dy-spriteHeight/2, spriteWidth, spriteHeight);
+      this.context.translate(dx, dy);
+      this.context.rotate(-this.orientation);
+      this.context.translate(-dx, -dy);
 
-        document.getElementById('boatThrottle').innerHTML = "Throttle:" + this.throttle.toFixed(2);
-        document.getElementById('boatSTW').innerHTML = "STW:" + this.stw.toFixed(2);
-        document.getElementById('boatRudder').innerHTML = "Rudder:" + this.rudder.toFixed(2);
-        document.getElementById('boatOrientation').innerHTML = "Orientation:" + ((this.orientation*180/Game.pi)%360).toFixed(2);
+      document.getElementById('boatThrottle').innerHTML = "Throttle:" + this.throttle.toFixed(2);
+      document.getElementById('boatSTW').innerHTML = "STW:" + this.stw.toFixed(2);
+      document.getElementById('boatRudder').innerHTML = "Rudder:" + this.rudder.toFixed(2);
+      document.getElementById('boatOrientation').innerHTML = "Orientation:" + ((this.orientation*180/Game.pi)%360).toFixed(2);
 
-        if (dy+spriteHeight/2>=0.85*Game.canvas.height || dy-spriteHeight/2<=0.15*Game.canvas.height)
-          Game.scale_m = Game.scale_m * 0.99;
-        else if (dy+spriteHeight/2<=0.6*Game.canvas.height || dy-spriteHeight/2>=0.4*Game.canvas.height)
-          Game.scale_m = Game.scale_m * 1.01;
-      }
+    }
 
 }

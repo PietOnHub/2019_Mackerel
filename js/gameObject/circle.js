@@ -12,7 +12,6 @@ class Circle extends GameObject
       );
 
       this.radius = radius;
-      this.strength = 0.2;
     }
 
     update(secondsPassed){
@@ -37,10 +36,10 @@ class Circle extends GameObject
     draw(){
 
       if (this.fraction == 0){
-        this.color = 'rgba(100,255,255,'+ this.strength +')';
+        this.color = 'red';
       }
       else if (this.fraction == 1){
-        this.color = 'rgba(255,100,100,'+this.strength + ')';
+        this.color = 'green';
       }
 
       var dx = this.x * Game.scale_m + Game.offset_x ;

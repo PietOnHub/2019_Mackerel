@@ -2,6 +2,7 @@
 // GAME --------------------------------------
 
 //globals
+var Tools = {};
 var Game = {};
 
 Game.g = 9.81;
@@ -14,6 +15,9 @@ Game.running = false;
 Game.bordersize = 50;
 
 Game.scale_m = 20;
+Game.scale_m_max = 20;
+Game.scale_m_min = 6;
+
 
 
 Game.init = function() {
