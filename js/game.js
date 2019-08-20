@@ -5,6 +5,7 @@
 var Game = {};
 
 Game.g = 9.81;
+Game.pi = Math.PI;
 Game.gameObjects = [];
 Game.oldTimeStamp = 0;
 Game.secondsPassed = 0;

@@ -2,7 +2,7 @@
 
 function createWorld(){
   var spawning;
-  //startSpawning();
+  startSpawning();
   createBoat();
 }
 
@@ -28,26 +28,17 @@ function startSpawning(){
         // fraction
         Math.round(Math.random()+0.0))
         );
-      if (Game.gameObjects.length >= 10000)
+      if (Game.gameObjects.length >= 100)
         clearInterval(spawning)
-  }, 10);
+  }, 200);
 }
 
 function createBoat() {
   Boat = new BoatClass(
-    Game.context,
-    // xpos init
-    canvas.width/2,
-    // ypos init
-    canvas.height/2,
-    // xvel init
-    0,
-    // yvel init
-    0,
-    // diameter init
-    40,
-    // fraction
-    2
+    Game.context,           // ctx
+    Game.canvas.width/2,    // x
+    Game.canvas.height/2,   // y
+    0                       // angle
   )
   Game.gameObjects.push(Boat)
 }

@@ -1,29 +1,18 @@
-
-class GameObject
-{
-    constructor (context, x, y, vx, vy, fraction){
-        this.context = context;
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
-        this.fraction = fraction;
-        this.strength = 0.2;
-
-
-        this.isColliding = false;
-        this.obsolete = false;
-    }
-}
-
 class Circle extends GameObject
 {
     constructor (context, x, y, vx, vy, radius, fraction){
-        super(context, x, y, vx, vy, fraction);
+      super(
+        context,
+        x,                      // x
+        y,                      // y
+        vx,                     // vx
+        vy,                     // vy
+        Math.PI*radius*radius*0.1,  // mass
+        fraction                // fraction
+      );
 
-        //Set default width and height
-        this.radius = radius;
-        this.mass = Math.PI*radius*radius;
+      this.radius = radius;
+      this.strength = 0.2;
     }
 
 
