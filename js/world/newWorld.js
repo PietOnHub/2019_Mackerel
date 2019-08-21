@@ -11,25 +11,24 @@ function startSpawning(){
 
   spawning = setInterval(function(){
 
-
       Game.gameObjects.push(new Circle(
         Game.context,
         // xpos init
-        Math.random()*20-10,
+        Math.random()*100-50,
         // ypos init
-        -20,
+        Math.random()*(-30)-20,
         // xvel init
         Math.random()*1,
         // yvel init
         Math.random()*4+1,
         // diameter init
-        Math.random()*1,
+        Math.random()*5,
         // fraction
         Math.round(Math.random()+0.0))
         );
-      if (Game.gameObjects.length >= 100)
+      if (Game.gameObjectsCollision.length >= 100)
         clearInterval(spawning)
-  }, 500);
+  }, 1000);
 }
 
 function createBoat() {
@@ -40,4 +39,14 @@ function createBoat() {
     0                       // angle
   )
   Game.gameObjects.push(Boat)
+
+  setInterval(function(){
+    Game.gameObjects.push(new Bubble(
+      Game.context,           // ctx
+      Boat.x,                 // x
+      Boat.y,                 // y
+      0,
+      0
+    ));},200);
+
 }

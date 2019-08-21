@@ -9,8 +9,8 @@ Collision.checkCollisions = function(){
   var plasticity = 0.9;
 
   // Reset collision state of all objects
-  for (var i = 0; i < Game.gameObjects.length; i++) {
-    Game.gameObjects[i].isColliding = false;
+  for (var i = 0; i < Game.gameObjectsCollision.length; i++) {
+    Game.gameObjectsCollision[i].isColliding = false;
   }
 
   Collision.detectCollisionsObjects(plasticity);
@@ -23,13 +23,13 @@ Collision.detectCollisionsObjects = function(plasticity){
   var obj2;
 
   // Start checking for collisions
-  for (var i = 0; i < Game.gameObjects.length; i++)
+  for (var i = 0; i < Game.gameObjectsCollision.length; i++)
   {
-    obj1 = Game.gameObjects[i];
-    for (var j = i + 1; j < Game.gameObjects.length; j++)
+    obj1 = Game.gameObjectsCollision[i];
+    for (var j = i + 1; j < Game.gameObjectsCollision.length; j++)
     {
 
-      obj2 = Game.gameObjects[j];
+      obj2 = Game.gameObjectsCollision[j];
 
       // Compare object1 with object2
       if (Collision.circleIntersect(obj1.x, obj1.y, obj1.radius, obj2.x, obj2.y, obj2.radius)){
@@ -59,9 +59,9 @@ Collision.detectCollisionsObjects = function(plasticity){
 
 Collision.detectColissionsBorder = function(plasticity){
   var obj1;
-  for (var i=0; i< Game.gameObjects.length; i++) {
+  for (var i=0; i< Game.gameObjectsCollision.length; i++) {
 
-    obj1 = Game.gameObjects[i];
+    obj1 = Game.gameObjectsCollision[i];
 
     if (obj1.y + obj1.radius >= Game.bordersize || obj1.y - obj1.radius <= -Game.bordersize) {
       obj1.vy = (-plasticity) * obj1.vy;

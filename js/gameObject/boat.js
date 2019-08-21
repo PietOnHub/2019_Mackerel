@@ -20,15 +20,26 @@ class BoatClass extends GameObject
       );
 
       this.radius = 3;
-      this.cw = 0.03;
+      this.collision = true;
+
       this.rho = 1000;
       this.mass = mass;
+      this.cw_along = 0.03;
+      this.cw_side = 0.2;
+      this.cw_rear = 0.2;
+      this.area_along = 1;
+      this.area_side = 1;
+      this.area_rear = 2;
 
-      this.F_throttleMax = 5000;
+      this.FThrottleMax = 5000;
       this.throttle = 0;
+      this.vx_stw = 0;
+      this.vy_stw = 0;
+      this.valong_stw = 0;
+      this.vside_stw = 0;
+      this.stw = 0;
 
       this.orientation = orientation;
-      this.stw = 0;
       this.rudder = 0;
 
       this.sprite = Images.Boat;
@@ -52,34 +63,53 @@ class BoatClass extends GameObject
       this.rudder <= -1 ? this.rudder=-1 :this.rudder;
     }
 
-    calcSTW() {
-
-      var A = function (stw) {
-        if (stw <= 25) {
-          return (1 - (stw/25) *0.7)
-        }
-        return (0.3)
+    areaEffective(maxGlideV, minArea, maxArea) {
+      if (this.valong_stw <= maxGlideV) {
+        return (maxArea - (this.valong_stw/25) *(maxArea-minArea))
       }
+      return (minArea)
+    }
 
-      var F_w = 0.5 * this.cw *  A(this.stw) * this.rho * this.stw * this.stw;
-      var F_throttle = this.throttle * this.F_throttleMax;
+    calcAcc() {
 
-      if (this.stw >= 0) {
-        var a_res = (F_throttle - F_w) / this.mass;
+
+
+      var FW_along = 0.5 * this.cw_along *  this.areaEffective(25, 0.3, 1) * this.rho * this.valong_stw * this.valong_stw;
+      var FW_rear = 0.5 * this.cw_rear *  this.area_rear * this.rho * this.valong_stw * this.valong_stw;
+      var FW_side = 0.5 * this.cw_side *  this.area_side * this.rho * this.vside_stw * this.vside_stw;
+
+
+      var FThrottle = this.throttle * this.FThrottleMax;
+
+      if (this.valong_stw >= 0) {
+        if (this.vside_stw <=0) {
+          var Fy = (FThrottle - FW_along)  * -Math.cos(this.orientation) + FW_side * Math.sin(this.orientation);
+          var Fx = (FThrottle - FW_along)  *  Math.sin(this.orientation) + FW_side * Math.cos(this.orientation);
+        }
+        else {
+          var Fy = (FThrottle - FW_along)  * -Math.cos(this.orientation) - FW_side * Math.sin(this.orientation);
+          var Fx = (FThrottle - FW_along)  *  Math.sin(this.orientation) - FW_side * Math.cos(this.orientation);
+        }
       }
       else {
-        var a_res = (F_throttle + F_w) / this.mass;
+        if (this.vside_stw <=0) {
+          var Fy = (FThrottle + FW_rear) * -Math.cos(this.orientation) + FW_side * Math.sin(this.orientation);
+          var Fx = (FThrottle + FW_rear) *  Math.sin(this.orientation) + FW_side * Math.cos(this.orientation);
+        }
+        else {
+          var Fy = (FThrottle + FW_rear) * -Math.cos(this.orientation) - FW_side * Math.sin(this.orientation);
+          var Fx = (FThrottle + FW_rear) *  Math.sin(this.orientation) - FW_side * Math.cos(this.orientation);
+        }
       }
-      document.getElementById('boatFW').innerHTML = "FW:" + F_w.toFixed(2);
-      document.getElementById('boatFTh').innerHTML = "F_throttle:" + F_throttle.toFixed(2);
-      document.getElementById('boatA').innerHTML = "a_res:" + a_res.toFixed(2);
-      return a_res * Game.secondsPassed + this.stw;
+      document.getElementById('boatOptional').innerHTML = "Fx:" + Fx.toFixed(2) + " Fy:" + Fy.toFixed(2);
+
+      return {x: Fx/this.mass, y: Fy/this.mass};
 
     }
 
     calcOrientation () {
       // simple velocity independent and linear change of orientation
-      return (this.orientation) + this.rudder * Game.pi / 180;
+      return (this.orientation) + this.rudder * Game.pi / 180 * this.valong_stw * 0.1;
     }
 
     update(secondsPassed){
@@ -108,12 +138,19 @@ class BoatClass extends GameObject
       if (Key.isDown(Key.PGDWN))
         Game.scale_m = Game.scale_m * 1/1.1;
 
-
-      this.stw = -this.vy;
-      this.stw = this.calcSTW();
+      this.vx_stw = this.vx;
+      this.vy_stw = this.vy;
       this.orientation = this.calcOrientation();
 
-      this.vy = -this.stw;
+      this.valong_stw = this.vy_stw * (-Math.cos(this.orientation)) + this.vx_stw * (Math.sin(this.orientation))
+      this.vside_stw  = this.vx_stw * (Math.cos(this.orientation))  + this.vy_stw * (Math.sin(this.orientation))
+
+      this.vx = this.calcAcc().x * Game.secondsPassed + this.vx;
+      this.vy = this.calcAcc().y * Game.secondsPassed + this.vy;
+
+      this.vx_stw = this.vx;
+      this.vy_stw = this.vy;
+      this.stw = ((this.vx_stw*this.vx_stw)+(this.vy_stw*this.vy_stw))**(0.5);
 
       this.x += this.vx * Game.secondsPassed;
       this.y += this.vy * Game.secondsPassed;
@@ -128,9 +165,9 @@ class BoatClass extends GameObject
       var spriteWidth = this.sprite.tgtScale * this.sprite.width * Game.scale_m;
       var spriteHeight = this.sprite.tgtScale * this.sprite.height * Game.scale_m;
 
-      if (dy+spriteHeight/2>=0.75*Game.canvas.height || dy-spriteHeight/2<=0.25*Game.canvas.height)
+      if (dy+spriteHeight/2>=0.85*Game.canvas.height || dy-spriteHeight/2<=0.15*Game.canvas.height || dx+spriteWidth/2>=0.85*Game.canvas.width || dx-spriteWidth/2<=0.15*Game.canvas.width)
         Game.scale_m = Game.scale_m * 0.995;
-      else if (dy+spriteHeight/2<=0.6*Game.canvas.height || dy-spriteHeight/2>=0.40*Game.canvas.height)
+      else if (dy+spriteHeight/2<=0.6*Game.canvas.height || dy-spriteHeight/2>=0.40*Game.canvas.height || dx+spriteWidth/2<=0.6*Game.canvas.width || dx-spriteWidth/2>=0.40*Game.canvas.width)
         Game.scale_m = Game.scale_m * 1.005;
 
       if (Game.scale_m >= Game.scale_m_max)
@@ -144,6 +181,8 @@ class BoatClass extends GameObject
 
       spriteWidth = this.sprite.tgtScale * this.sprite.width * Game.scale_m;
       spriteHeight = this.sprite.tgtScale * this.sprite.height * Game.scale_m;
+
+
 
 
       this.color = 'rgba(100,100,255,'+ this.strength +')';

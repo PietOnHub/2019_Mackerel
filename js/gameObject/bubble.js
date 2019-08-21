@@ -1,30 +1,27 @@
-class Circle extends GameObject
+class Bubble extends GameObject
 {
     constructor (context, x, y, vx, vy, radius, fraction){
       super(
         context,
         x,                      // x
         y,                      // y
-        vx,                     // vx
-        vy,                     // vy
-        Math.PI*radius*radius*20,  // mass
-        fraction                // fraction
+        0,                     // vx
+        0,                     // vy
+        0,              // mass
+        9                // fraction
       );
 
-      this.radius = radius;
-      this.collision = true;
+      this.radius = 1;
+      this.obsolete = false;
+      this.strength = 0.1;
     }
 
     update(secondsPassed){
 
-      if (this.radius < 0.1){
-        this.radius = 0.1;
-        if (this.fraction == 0){
-          this.fraction == 1;
-        }
-        else {
-          this.fraction == 0
-        }
+      this.radius += 0.02;
+      this.strength -= 0.0001;
+      if (this.radius > 50){
+        this.obsolete = true;
       }
 
       //Apply acceleration
@@ -36,18 +33,13 @@ class Circle extends GameObject
 
     draw(){
 
-      if (this.fraction == 0){
-        this.color = 'red';
-      }
-      else if (this.fraction == 1){
-        this.color = 'green';
-      }
-
       var dx = this.x * Game.scale_m + Game.offset_x ;
       var dy = this.y * Game.scale_m + Game.offset_y ;
       var dradius = this.radius * Game.scale_m;
 
         //Draw a simple square
+        this.color = 'rgba(50,100,83,'+this.strength + ')';
+
         this.context.fillStyle = this.color;
         this.context.beginPath();
         this.context.arc(dx, dy, dradius, 0, 2 * Game.pi);

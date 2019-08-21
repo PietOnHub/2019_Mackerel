@@ -12,6 +12,7 @@
 
   <link rel='stylesheet' type='text/css' href='css/style.css' media='screen'/>
   <link rel='stylesheet' type='text/css' href='css/layout.css' media='screen'/>
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
 
   <meta name='description' content='mackerel game'>
   <meta name='author' content='PietOnHub'>
@@ -24,6 +25,7 @@
   <script src='js/gameObject/_gameObject.js'></script>
   <script src='js/gameObject/boat.js'></script>
   <script src='js/gameObject/circle.js'></script>
+  <script src='js/gameObject/bubble.js'></script>
   <script src='js/collision/collision.js'></script>
   <script src='js/world/newWorld.js'></script>
   <script src='js/tools/clearCanvas.js'></script>
@@ -39,12 +41,10 @@
   <span class='viewInfoItem' id='mainTimer'>TIME: 0</span>
   <span class='viewInfoItem' id='mainObjCount'>OBJ#: 0</span>
   <span class='viewInfoItem' id='boatThrottle'>Throttle: 0</span>
-  <span class='viewInfoItem' id='boatFW'>FW: 0</span>
-  <span class='viewInfoItem' id='boatFTh'>FTh: 0</span>
-  <span class='viewInfoItem' id='boatA'>a_res: 0</span>
   <span class='viewInfoItem' id='boatSTW'>STW: 0</span>
   <span class='viewInfoItem' id='boatRudder'>Rudder: 0</span>
   <span class='viewInfoItem' id='boatOrientation'>Orientation: 0</span>
+  <span class='viewInfoItem' id='boatOptional'> </span>
 </div>
 
 <div id= 'wrapper' class='viewWrapper'>
@@ -58,7 +58,7 @@
 
       <div class='viewContentLeft'>
         <div class='viewContentLeftCanvas'>
-            <canvas id='canvas' width='800' height='600' style='z-index:0; width: 100%'> noCanvas! </canvas>
+            <canvas id='canvas' width='800' height='600' style='z-index:-10; width: 100%'> noCanvas! </canvas>
         </div>
       </div>
 
@@ -68,13 +68,20 @@
         </div>
         <div class='viewContentRightButtons'>
           <span class='viewHeaderText'> Buttons </span>
+          <ul  type="none" class='viewContentRightButtonsText'>
+            <li> Throttle +/-: key up/down </li>
+            <li> Rudder l/r: key left/right </li>
+            <li> Zoom in/out: page up/down </li>
+            <li> throttle to 0: t </li>
+            <li> rudder to middle: r </li>
+          </ul>
         </div>
       </div>
 
     </div>
 
     <div class='viewFooter'>
-      <span class='viewFooterText'> &copy MackerelOS 0.4.2 </span>
+      <span class='viewFooterText'> &copy MackerelOS 0.5.0 </span>
     </div>
 
   </div>

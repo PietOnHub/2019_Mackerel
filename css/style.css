@@ -73,6 +73,22 @@ canvas {
   padding: 0.5vh;
 }
 
+.viewContentRightButtonsText {
+  font-family: 'Indie Flower', cursive;
+  margin: 2vh;
+  font-size: 3vh;
+  background-color: yellow;
+  color:black;
+  border-color: white;
+  border-style:solid;
+  border-width: 1px;
+  border-radius: 1px;
+  padding-top: 0.5vh;
+  padding-left: 1.5vh;
+  padding-bottom: 2vh;
+  text-align: left;
+}
+
 .viewFooter{
 }
 

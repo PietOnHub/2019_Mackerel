@@ -16,6 +16,11 @@ function gameLoop(timeStamp) {
     return value.obsolete == false;
   });
 
+  // sorting out obsolete contents before next loop
+  Game.gameObjectsCollision = Game.gameObjects.filter(function(value, index, arr){
+    return value.obsolete == false && value.collision == true;
+  });
+
   // updating the objects
   for (var i = 0; i < Game.gameObjects.length; i++) {
     Game.gameObjects[i].update(Game.secondsPassed);
@@ -34,6 +39,9 @@ function gameLoop(timeStamp) {
   for (var i = 0; i < Game.gameObjects.length; i++) {
     Game.gameObjects[i].draw();
   }
+
+  // draw boat
+  Boat.draw();
 
   // draw the engine info
   Tools.drawInfo(Game.secondsPassed, Game.secondsPassedTotal);
