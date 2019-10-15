@@ -36,6 +36,9 @@ function gameLoop(timeStamp) {
   Tools.clearCanvas(Game.context, Game.canvas);
 
   // draw the current state
+  Game.offset_y = -Game.scale_m*Boat.getY()+Game.canvas.height/2;
+  Game.offset_x = -Game.scale_m*Boat.getX()+Game.canvas.width/2;
+
   for (var i = 0; i < Game.gameObjects.length; i++) {
     Game.gameObjects[i].draw();
   }

@@ -165,9 +165,9 @@ class BoatClass extends GameObject
       var spriteWidth = this.sprite.tgtScale * this.sprite.width * Game.scale_m;
       var spriteHeight = this.sprite.tgtScale * this.sprite.height * Game.scale_m;
 
-      if (dy+spriteHeight/2>=0.85*Game.canvas.height || dy-spriteHeight/2<=0.15*Game.canvas.height || dx+spriteWidth/2>=0.85*Game.canvas.width || dx-spriteWidth/2<=0.15*Game.canvas.width)
+      if (this.stw > 11)
         Game.scale_m = Game.scale_m * 0.995;
-      else if (dy+spriteHeight/2<=0.6*Game.canvas.height || dy-spriteHeight/2>=0.40*Game.canvas.height || dx+spriteWidth/2<=0.6*Game.canvas.width || dx-spriteWidth/2>=0.40*Game.canvas.width)
+      else if (this.stw < 9)
         Game.scale_m = Game.scale_m * 1.005;
 
       if (Game.scale_m >= Game.scale_m_max)
@@ -181,9 +181,6 @@ class BoatClass extends GameObject
 
       spriteWidth = this.sprite.tgtScale * this.sprite.width * Game.scale_m;
       spriteHeight = this.sprite.tgtScale * this.sprite.height * Game.scale_m;
-
-
-
 
       this.color = 'rgba(100,100,255,'+ this.strength +')';
       this.context.fillStyle = this.color;
@@ -205,6 +202,13 @@ class BoatClass extends GameObject
       document.getElementById('boatRudder').innerHTML = "Rudder:" + this.rudder.toFixed(2);
       document.getElementById('boatOrientation').innerHTML = "Orientation:" + ((this.orientation*180/Game.pi)%360).toFixed(2);
 
+    }
+    getX() {
+      return this.x;
+    }
+
+    getY() {
+      return this.y;
     }
 
 }

@@ -16,7 +16,7 @@ Game.bordersize = 200;
 
 Game.scale_m = 10;
 Game.scale_m_max = 20;
-Game.scale_m_min = 1.5;
+Game.scale_m_min = 5;
 
 
 
